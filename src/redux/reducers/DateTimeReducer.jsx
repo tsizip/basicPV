@@ -3,7 +3,8 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { formats } from 'dayjs/locale/zh-cn';
 const initialState = {
-     data: ''
+     data: '',
+     newData:''
 }
 
 const DateTimeReducer = (state = initialState, action) => {
@@ -11,11 +12,11 @@ const DateTimeReducer = (state = initialState, action) => {
 
           case 'PUSH_ITEM':
                state.data = action.data
-               console.log('reducer', state.data)
+               // console.log('reducer', state.data)
                return { ...state }
                break;
-          case 'PUSH_LIST':
-               state.data = action.data
+          case 'NEW_DATA':
+               state.newData = action.data
                // console.log(state.data)
                return { ...state }
                break;

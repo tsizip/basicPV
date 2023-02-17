@@ -13,66 +13,84 @@ export default function ReactBigCalendar() {
      let dispatch = useDispatch()
      let navigate = useNavigate()
      let dataReducer = useSelector(state => state.DateTimeReducer)
-     console.log('data reducer? ', dataReducer)
-     const [eventsData, setEventsData] = useState([]);
+     // console.log('data reducer? ', dataReducer)
+     const [eventsData, setEventsData] = useState(JSON.parse(localStorage.getItem('dataDate')) ? JSON.parse(localStorage.getItem('dataDate')) : events);
+     console.log('event', eventsData)
 
      const handleSelect = ({ start, end }) => {
 
-
+          console.log(start);
+          console.log(end);
           const title = window.prompt("New Event name");
           if (title) {
-               let result = async () => {
-                    await setEventsData([
-                         ...eventsData,
-                         {
-                              start,
-                              end,
-                              title
-                         }
-                    ]);
-                    
-               }
+               setEventsData([
+                    ...eventsData,
+                    {
+                         id: eventsData.length,
+                         title,
+                         start,
+                         end,
 
-               result()
 
+                    }
+               ]);
+               setTimeout(()=>{
+                    document.getElementById('clickButton').click();
+               },500)
           }
-          
 
-          // console.log(eventsData)
 
+          // console.log('event', event)
+          // console.log('xoa')
+
+
+
+          // localStorage.setItem('dataDate', JSON.stringify(eventsData))
      };
      useEffect(() => {
-          // console.log('render',eventsData)
-          dispatch({
-               type:"PUSH_ITEM",
-               data:eventsData
-          })
 
-     }, [eventsData])
 
+
+
+
+     }, [])
+
+   
      const onSelect = (event) => {
           if (window.confirm('delete ?') == true) {
+               console.log('event', event)
                // console.log('xoa')
-               // let newData = eventsData.filter(n => n !== event)
-               // setEventsData(newData)
+
+               let newData = eventsData.filter(n => n.id !== event.id)
+               // console.log('mang cu', eventsData)
+               // console.log('mang moi', newData)
+               localStorage.setItem('dataDate', JSON.stringify(newData))
+               window.location.reload()
           } else {
                console.log('ko xoa')
           }
-          console.log(event)
+          // console.log(event)
      }
      return (
           <div className="App">
+               <button style={{display:'none'}} id="clickButton" className="btn btn-danger" onClick={() => {
+                    let temp = eventsData
+                    // console.log('temp', temp)
+                    localStorage.setItem('dataDate', JSON.stringify(temp))
+                    window.location.reload()
+               }}>save</button>
                <Calendar
-                    views={["day", "agenda", "month"]}
+                    views={["day", "agenda", "work_week", "month"]}
                     selectable
                     localizer={localizer}
                     defaultDate={new Date()}
                     defaultView="month"
-                    events={eventsData}
+
+                    events={JSON.parse(localStorage.getItem('dataDate')) ? JSON.parse(localStorage.getItem('dataDate')) : events}
+                    // events={eventsData}
                     style={{ height: "100vh" }}
                     onSelectEvent={onSelect}
                     onSelectSlot={handleSelect}
-
                />
           </div>
      );

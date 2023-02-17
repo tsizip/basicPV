@@ -13,6 +13,7 @@ import ReactBigCalendar from './calendar/ReactBigCalendar';
 import ReactCalendar from './calendar/ReactCalendar';
 import TuiCalendar from './calendar/TuiCalendar';
 import FullCalendar from '@fullcalendar/react';
+import Detail from './calendar/Detail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +21,7 @@ root.render(
     <Provider store={store}>
       <Routes>
       <Route path='/' element={ <ReactBigCalendar />}></Route>
-      <Route path='/detail/:id' element={ <ReactBigCalendar />}></Route>
+      <Route path='/detail/:id' element={ <Detail />}></Route>
 
       </Routes>
      
