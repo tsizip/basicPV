@@ -7,3 +7,22 @@
           
      }
 }
+
+.react-calendar{
+     margin: 10px auto;
+     width: 375px!important;
+}
+
+.small{
+     display: none;
+}
+
+@include responsive("400") {
+     .big{
+          display: none;
+     }
+     .small{
+          display: block;
+     }
+}
+
