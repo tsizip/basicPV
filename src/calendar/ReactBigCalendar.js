@@ -148,7 +148,7 @@ export default function ReactBigCalendar() {
                </div>
                <NavLink to='/eventbrite' className="col-12 col-lg-1 btn btn-success d-flex" style={{justifyContent:'center', alignItems:'center'}}>
                     <div>
-                         eventbrite
+                         EventBrite
                     </div>
                </NavLink>
 

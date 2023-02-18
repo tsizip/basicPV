@@ -73,7 +73,7 @@ export default function Eventbrite() {
                          <TabPane tab="Miền Bắc" key="1">
                               <div className='row'>
                                    {_.map(dataMB,(value, index) => {
-                                        return <div className='col-3' key={index}>
+                                        return <div style={{paddingTop:'10px'}} className='col-12 col-sm-6 col-lg-3' key={index}>
                                              <div className="card">
                                                   <img className="card-img-top" src={value.img} alt="Title" />
                                                   <div className="card-body">
@@ -92,8 +92,8 @@ export default function Eventbrite() {
                          <TabPane tab="Miền Nam" key="2">
                          <div className='row'>
                                    {_.map(dataMN,(value, index) => {
-                                        // console.log(value.desc.length)
-                                        return <div className='col-3' key={index}>
+                                     
+                                        return <div style={{paddingTop:'10px'}} className='col-12 col-sm-6 col-lg-3' key={index}>
                                              <div className="card">
                                                   <img className="card-img-top" src={value.img} alt="Title" />
                                                   <div className="card-body">
