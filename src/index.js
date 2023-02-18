@@ -11,8 +11,6 @@ import store from './redux/configStore';
 import './assets/scss/main.scss'
 import ReactBigCalendar from './calendar/ReactBigCalendar';
 import ReactCalendar from './calendar/ReactCalendar';
-import TuiCalendar from './calendar/TuiCalendar';
-import FullCalendar from '@fullcalendar/react';
 import Detail from './calendar/Detail';
 import Eventbrite from './calendar/Eventbrite';
 
@@ -21,13 +19,10 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <Routes>
-      <Route path='' element={<div><ReactBigCalendar/><ReactCalendar /></div>}></Route>
-      <Route path='/detail/:id' element={ <Detail />}></Route>
-      <Route path='/eventbrite' element={ <Eventbrite />}></Route>
-
+        <Route path='' element={<div><ReactBigCalendar /><ReactCalendar /></div>}></Route>
+        <Route path='/detail/:id' element={<Detail />}></Route>
+        <Route path='/eventbrite' element={<Eventbrite />}></Route>
       </Routes>
-     
-     
     </Provider>
   </BrowserRouter>
 );

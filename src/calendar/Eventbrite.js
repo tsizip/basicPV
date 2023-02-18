@@ -4,58 +4,22 @@ import { Radio, Space, Tabs } from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash'
-export default function Eventbrite() {
-     const [tabPosition, setTabPosition] = useState('left');
-     let dispatch = useDispatch()
-     const changeTabPosition = (e) => {
-          setTabPosition(e.target.value);
-     };
+import { mienBacAction, mienNamAction } from '../redux/actions/CalendarActions';
 
+export default function Eventbrite() {
+     let dispatch = useDispatch()
      let dataMB = useSelector(state => state.DateTimeReducer.mienBac)
      let dataMN = useSelector(state => state.DateTimeReducer.mienNam)
-// console.log(typeof dataMB)
      useEffect(() => {
           let promise = fetch('https://63f01fcfc59531ccf17b7fd9.mockapi.io/api/mienbac')
-          // .then(response=>response.json())
-          // .then(data=>data)
           promise.then(res => res.json()).then(data => {
-               dispatch({
-                    type: 'MIEN_BAC',
-                    data: data
-               })
+               dispatch(mienBacAction(data))
           })
-
-
           let promise2 = fetch('https://63f01fcfc59531ccf17b7fd9.mockapi.io/api/miennam')
-          // .then(response=>response.json())
-          // .then(data=>data)
           promise2.then(res => res.json()).then(data => {
-               dispatch({
-                    type: 'MIEN_NAM',
-                    data: data
-               })
+               dispatch(mienNamAction(data))
           })
-
-
-          // let promise = fetch('https://63f01fcfc59531ccf17b7fd9.mockapi.io/api/miennam')
-          // // .then(response=>response.json())
-          // // .then(data=>data)
-          // promise.then(res=>res.json()).then(data=>{
-          //      console.log(data)
-          // })
-
-          // console.log('ok chuaw', result)
-
-          // fetch('https://63f01fcfc59531ccf17b7fd9.mockapi.io/api/mienbac')
-          // .then(response=>response.json())
-          // .then(data=>{console.log('mien bac', data)})
-
      }, [])
-
-     const renderBac = () => {
-
-     }
-
      return (
           <div>
                <NavLink to='/'>
@@ -63,8 +27,6 @@ export default function Eventbrite() {
                </NavLink>
                <h3 className='text-center'>Thời gian diễn ra của một số sự kiện đáng chú ý</h3>
                <div className='container' style={{ margin: '0 auto' }}>
-
-
                     <Tabs
                          tabPosition={'top'}
                          centered
@@ -82,17 +44,13 @@ export default function Eventbrite() {
                                                        <p className="card-text text-primary">{value.date}</p>
                                                   </div>
                                              </div>
-
                                         </div>
                                    })}
-                                   {/* {dataMB?.map()} */}
                               </div>
-
                          </TabPane>
                          <TabPane tab="Miền Nam" key="2">
                          <div className='row'>
-                                   {_.map(dataMN,(value, index) => {
-                                     
+                                   {_.map(dataMN,(value, index) => {  
                                         return <div style={{paddingTop:'10px'}} className='col-12 col-sm-6 col-lg-3' key={index}>
                                              <div className="card">
                                                   <img className="card-img-top" src={value.img} alt="Title" />
@@ -102,15 +60,12 @@ export default function Eventbrite() {
                                                        <p className="card-text text-primary">{value.date}</p>
                                                   </div>
                                              </div>
-
                                         </div>
                                    })}
-                                   {/* {dataMB?.map()} */}
                               </div>
                          </TabPane>
                          <TabPane tab="Miền Trung" key="3">Đang cập nhật...</TabPane>
                     </Tabs>
-
                </div>
           </div>
      )

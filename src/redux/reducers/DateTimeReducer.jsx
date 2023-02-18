@@ -2,6 +2,7 @@ import moment from "moment"
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { formats } from 'dayjs/locale/zh-cn';
+import { MIEN_BAC, MIEN_NAM, PUSH_ITEM, SMALL_CLD } from "../consts/CalendarConsts";
 const initialState = {
      dataDate: [],
      mienBac: '',
@@ -12,24 +13,24 @@ const initialState = {
 const DateTimeReducer = (state = initialState, action) => {
      switch (action.type) {
 
-          case 'PUSH_ITEM':
+          case PUSH_ITEM:
 
                state.dataDate = action.data
                return { ...state }
                break;
-          case 'MIEN_BAC':
+          case MIEN_BAC:
 
                state.mienBac = action.data
                console.log('reducer', state.mienBac)
                return { ...state }
                break;
-          case 'MIEN_NAM':
+          case MIEN_NAM:
 
                state.mienNam = action.data
                // console.log('reducer', state.mienBac)
                return { ...state }
                break;
-          case 'SMALL_CLD':
+          case SMALL_CLD:
                // console.log('reducer', action)
                switch (action.data) {
                     case 4:

@@ -4,6 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
+import { smallCalendar } from "../redux/actions/CalendarActions";
 
 export default function ReactCalendar() {
   let dataReducer = useSelector(state => state.DateTimeReducer.smallCalendar)
@@ -11,20 +12,11 @@ export default function ReactCalendar() {
   const [value, onChange] = useState(0);
   const [date,setDate] = useState(moment(new Date()).format('DD-MM-YYYY'))
   const handleChange = (value) => {
-    // console.log('value', value)
     setDate(moment(value).format('DD-MM-YYYY'))
-    // console.log('value', moment(value).format('D'))
     let date = moment(value).format('D')
     onChange(date)
-    dispatch({
-      type: 'SMALL_CLD',
-      data: Number(date),
-      date: moment(value).format('DD-MM-YYYY')
-    })
+    dispatch(smallCalendar(Number(date),moment(value).format('DD-MM-YYYY')))
   }
-  // useEffect(() => {
-  //   // console.log('value', value)
-  // }, [])
   return (
     <div  className="small App">
       <Calendar onChange={handleChange} />
